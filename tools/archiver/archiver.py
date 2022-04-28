@@ -17,8 +17,11 @@ class Archiver(QObject):
 
     @pyqtSlot(str)
     def extract(self, path):
+        """
+        Extract archive(-s).
+        From 'Archive.zip' to 'Archive.zip_extracted/*'.
+        """
         array = path[self.countOfDeletedSymbols:].split(self.splitSeparator)
-        print(array)
         for url in array:
             out_url = url + "_extracted"
             if not os.path.exists(out_url):
@@ -27,6 +30,7 @@ class Archiver(QObject):
 
     @pyqtSlot(str)
     def pack(self, path):
+        """ Pack files to 'Archive.zip'. """
         array = path[self.countOfDeletedSymbols:].split(self.splitSeparator)
         path = os.path.dirname(array[0])
         patoolib.create_archive(os.path.join(path, "Archive.zip"), array)
