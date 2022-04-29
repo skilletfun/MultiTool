@@ -1,36 +1,43 @@
 # This Python file uses the following encoding: utf-8
-from PyQt5.QtCore import QObject, pyqtSlot
+# from PyQt5.QtCore import QObject, pyqtSlot
+import sys
+sys.path.append('../adds')
+from basetool import Basetool
+from PyQt5.QtCore import pyqtSlot
 import patoolib
 import os
-import sys
 
 
-class Archiver(QObject):
-    countOfDeletedSymbols = 7
-    splitSeparator = ",file://"
-
-    def __init__(self):
-        super().__init__()
-        if not sys.platform.startswith("linux"):
-            self.countOfDeletedSymbols = 8
-            self.splitSeparator = ",file:///"
-
-    @pyqtSlot(str)
-    def extract(self, path):
+class Archiver(Basetool):
+    @pyqtSlot(str, result=bool)
+    def extract(self, path: str):
         """
         Extract archive(-s).
         From 'Archive.zip' to 'Archive.zip_extracted/*'.
         """
-        array = path[self.countOfDeletedSymbols:].split(self.splitSeparator)
+        if path.startswith('file://'):
+            path = path[self.SYMBOLS_FOR_DELETE:]
+
+        array = path.split(self.SEPARATOR)
         for url in array:
             out_url = url + "_extracted"
             if not os.path.exists(out_url):
                 os.makedirs(out_url)
             patoolib.extract_archive(url, outdir=out_url)
+        return True
 
-    @pyqtSlot(str)
-    def pack(self, path):
+    @pyqtSlot(str, result=bool)
+    def pack(self, path: str):
         """ Pack files to 'Archive.zip'. """
-        array = path[self.countOfDeletedSymbols:].split(self.splitSeparator)
+        if path.startswith('file://'):
+            path = path[self.SYMBOLS_FOR_DELETE:]
+
+        array = path.split(self.SEPARATOR)
         path = os.path.dirname(array[0])
-        patoolib.create_archive(os.path.join(path, "Archive.zip"), array)
+
+        save_path = os.path.join(path, "Archive.zip")
+        if os.path.exists(save_path):
+            os.remove(save_path)
+
+        patoolib.create_archive(save_path, array)
+        return True
