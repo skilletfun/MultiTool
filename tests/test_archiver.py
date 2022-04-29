@@ -1,8 +1,7 @@
 from unittest import TestCase, main
 import sys, os, shutil
-sys.path.append('../tools/archiver')
-sys.path.append('../tools/adds')
-from archiver import Archiver
+sys.path.append('..')
+from tools.archiver.archiver import Archiver
 
 
 class ExtractTest(TestCase):

@@ -1,7 +1,5 @@
 # This Python file uses the following encoding: utf-8
-import sys
-sys.path.append('../adds')
-from basetool import Basetool
+from tools.adds.basetool import Basetool
 from PyQt5.QtCore import pyqtSlot
 import os
 

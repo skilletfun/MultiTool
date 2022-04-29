@@ -1,9 +1,8 @@
 import os
 from unittest import TestCase, main
 import sys
-sys.path.append('../tools/renamer')
-sys.path.append('../tools/adds')
-from renamer import Renamer
+sys.path.append('..')
+from tools.renamer.renamer import Renamer
 
 
 class RenamerTest(TestCase):
