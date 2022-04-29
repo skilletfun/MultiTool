@@ -1,28 +1,20 @@
 # This Python file uses the following encoding: utf-8
-from PyQt5.QtCore import QObject, pyqtSlot
+from PyQt5.QtCore import pyqtSlot
+from tools.adds.basetool import Basetool
 from PIL import Image
 import sys
 import os
 
-class Converter(QObject):
 
-    countOfDeletedSymbols = 7
-    splitSeparator = ",file://"
-
-    def __init__(self):
-        super(Converter, self).__init__()
-        if not sys.platform.startswith("linux"):
-            self.countOfDeletedSymbols = 8
-            self.splitSeparator = ",file:///"
-
+class Converter(Basetool):
     @pyqtSlot(str, str)
     def convert(self, files, dest_sfx):
         if files.startswith("file://"):
-            files = files[self.countOfDeletedSymbols:]
+            files = files[self.SYMBOLS_FOR_DELETE:]
 
         array = []
         if not os.path.isdir(files):
-            array = files.split(self.splitSeparator)
+            array = files.split(self.SEPARATOR)
 
         save_dir = os.path.join(os.path.dirname(array[0]), "converted_files")
         if not os.path.exists(save_dir):
