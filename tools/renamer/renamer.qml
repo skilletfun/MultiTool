@@ -99,10 +99,10 @@ Rectangle {
             anchors.bottomMargin: 50
             anchors.left: mask.left
             anchors.right: mask.right
-            horizontalAlignment: Text.AlignHCenter
+            horizontalAlignment: Text.AlignLeft
             font.pointSize: 14
 
-            text: 'Arabic:  ?A:1:1?\nRome:  ?R:1:1?\nExample:  File_?A:1:1'
+            text: 'Arabic:  ?A:1:1?\n\nRome:  ?R:1:1?\n\nExample:  File_?A:1:1\n\nTo remove part of name:  :part_of_name:replacing_str'
         }
 
         TextField {
