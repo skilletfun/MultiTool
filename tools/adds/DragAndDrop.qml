@@ -12,7 +12,7 @@ Rectangle {
 
     signal dropped(var drop)
 
-    property string _text: "Drag & Drop here"
+    property string _text: "Drag & Drop here" // Text that showed in center of item
     property color _textColor: "#1f4752"
     property color _arrowColor: "#1f4752"
     property color _borderColor: "green"
@@ -25,6 +25,7 @@ Rectangle {
     property int _pixelSizeText: 30
     property int _offsetY: -_pixelSizeText
 
+    // Dashed border of item
     Shape {
         id: shape
         visible: root._enableBorder
@@ -46,6 +47,7 @@ Rectangle {
         }
     }
 
+    // Text in center
     Text {
         id: drdrtext
         text: root._text
@@ -57,6 +59,7 @@ Rectangle {
         anchors.verticalCenterOffset: root._offsetY
     }
 
+    // Arrow
     Shape {
         id: sh
         smooth: true
