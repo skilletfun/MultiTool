@@ -1,5 +1,6 @@
-from PyQt5.QtCore import QObject, pyqtSlot
 import sys
+
+from PyQt5.QtCore import QObject, pyqtSlot
 
 
 class Basetool(QObject):

@@ -1,9 +1,9 @@
-# This Python file uses the following encoding: utf-8
-# from PyQt5.QtCore import QObject, pyqtSlot
-from tools.adds.basetool import Basetool
-from PyQt5.QtCore import pyqtSlot
-import patoolib
 import os
+import patoolib
+
+from PyQt5.QtCore import pyqtSlot
+
+from tools.adds.basetool import Basetool
 
 
 class Archiver(Basetool):
